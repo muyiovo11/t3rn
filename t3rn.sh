@@ -103,27 +103,27 @@ function execute_script() {
     read -p "请输入 EXECUTOR_MAX_L3_GAS_PRICE 的值 [默认 100]: " EXECUTOR_MAX_L3_GAS_PRICE
     EXECUTOR_MAX_L3_GAS_PRICE="${EXECUTOR_MAX_L3_GAS_PRICE:-100}"
 
+    # 提示用户输入 RPC_ENDPOINTS_ARBSP，如果没有输入则使用默认值
+    read -p "请输入 RPC_ENDPOINTS_Arbitrum 的值 [默认 https://sepolia.arbiscan.io]: " RPC_ENDPOINTS_Arbitrum
+    RPC_ENDPOINTS_OPSP="${RPC_ENDPOINTS_OPSP:-https://sepolia.arbiscan.io}"
+
     # 提示用户输入 RPC_ENDPOINTS_OPSP，如果没有输入则使用默认值
     read -p "请输入 RPC_ENDPOINTS_OPSP 的值 [默认 https://sepolia.optimism.io]: " RPC_ENDPOINTS_OPSP
-    RPC_ENDPOINTS_OPSP="${RPC_ENDPOINTS_OPSP:-https://sepolia.optimism.io}"
-
-    # 提示用户输入 RPC_ENDPOINTS_BSSP，如果没有输入则使用默认值
-    read -p "请输入 RPC_ENDPOINTS_BSSP 的值 [默认 https://sepolia.base.org]: " RPC_ENDPOINTS_BSSP
-    RPC_ENDPOINTS_BSSP="${RPC_ENDPOINTS_BSSP:-https://sepolia.base.org}"
+    RPC_ENDPOINTS_BSSP="${RPC_ENDPOINTS_OPSP:-https://sepolia.optimism.io}"
 
     # 设置环境变量
     export NODE_ENV=testnet
     export LOG_LEVEL=debug
     export LOG_PRETTY=false
-    export ENABLED_NETWORKS='base-sepolia,optimism-sepolia,l1rn'
+    export ENABLED_NETWORKS='arb-optimism,optimism-sepolia,l1rn'
     export EXECUTOR_PROCESS_PENDING_ORDERS_FROM_API=false
     export EXECUTOR_MAX_L3_GAS_PRICE="$EXECUTOR_MAX_L3_GAS_PRICE"
 
     # 新增的环境变量
     export EXECUTOR_PROCESS_ORDERS=true
     export EXECUTOR_PROCESS_CLAIMS=true
-    export RPC_ENDPOINTS_OPSP="$RPC_ENDPOINTS_OPSP"
-    export RPC_ENDPOINTS_BSSP="$RPC_ENDPOINTS_BSSP"
+    export RPC_ENDPOINTS_OPSP="$RPC_ENDPOINTS_ARBSP"
+    export RPC_ENDPOINTS_BSSP="$RPC_ENDPOINTS_OPSP"
 
     # 提示用户输入私钥
     read -p "请输入 PRIVATE_KEY_LOCAL 的值: " PRIVATE_KEY_LOCAL
